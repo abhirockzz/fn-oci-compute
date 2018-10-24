@@ -1,6 +1,6 @@
 # Functions with OCI Compute
 
-Fn functions to list and update OCI Compute instances. These are written in Go and use the OCI Go SDK to interact with Compute
+Fn functions to list and update OCI Compute instances. These are written in [Go](https://golang.org) and use the [OCI Go SDK](https://github.com/oracle/oci-go-sdk) to interact with Compute service
 
 **Your OCI API private key is required for authentication by the SDK** and it'll be embedded in the function (Docker) container (in `/function` directory). This is done using a `Dockerfile` for building the function which does exactly the same as **Fn** would do out-of-the-box except that it copies over the user provided OCI API private key in the second stage of the function build process
 
