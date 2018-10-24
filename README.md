@@ -91,7 +91,10 @@ Now that you have the list of instances (along with their OCID), try updating th
 
 `echo -n '{"OCID":"ocid1.instance.oc1.iad.abuwcljrljpitmsa5qqqamotfmnrte6jazfkx2ovbikadgpx7bdgei4t27ia", "NewDisplayName":"test-name"}' | DEBUG=1 fn invoke fn-compute-app update`
 
-If successful, you'll get a `Updated Compute Instance information successfully` response. You can log into your OCI console to check the same `Menu > Compute > Instances` (choose the correct compartment) or run the `LIST` function (which you previously deployed) to verify the same i.e. `echo -n '{"CompartmentIDFilter":"ocid1.compartment.oc1..aaaaaaaaxmrampww6livwdw3usqxlrmn5fiwi3dbkwtl3waigzbwl5olu5pa"}' | DEBUG=1 fn invoke fn-compute-app list`
+If successful, you'll get a `Updated Compute Instance information successfully` response. Now,
+
+- you can log into your OCI console to check the same `Menu > Compute > Instances` (choose the correct compartment), or
+- run the `LIST` function (which you previously deployed) to verify the same i.e. `echo -n '{"CompartmentIDFilter":"ocid1.compartment.oc1..aaaaaaaaxmrampww6livwdw3usqxlrmn5fiwi3dbkwtl3waigzbwl5olu5pa"}' | DEBUG=1 fn invoke fn-compute-app list`
 
 In case you specify an incorrect OCID, you might see
 
