@@ -9,5 +9,6 @@ FROM fnproject/go
 WORKDIR /function
 COPY --from=build-stage /go/src/func/func /function/
 # Added OCI private key for OCI Go SDK authentication
-COPY oci_private_key.pem /function/oci_private_key.pem
+ARG PRIVATE_KEY_NAME
+COPY $PRIVATE_KEY_NAME /function/$PRIVATE_KEY_NAME
 ENTRYPOINT ["./func"]
