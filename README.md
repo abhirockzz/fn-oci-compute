@@ -21,7 +21,7 @@ Clone this repo
 
 e.g.
 
-`fn create app --annotation oracle.com/oci/subnetIds='["ocid1.subnet.oc1.phx.aaaaaaaaghmsma7mpqhqdhbgnby25u2zo4wqlrrcskvu7jg56dryxt3hgvka"]' --config TENANT_OCID=ocid1.tenancy.oc1..aaaaaaaaydrjm77otncda2xn7qtv7l3hqnd3zxn2u6siwdhniibwfv4wwhta --config USER_OCID=ocid1.user.oc1..aaaaaaaa4seqx6jeyma46ldy4cbuv35q4l26scz5p4rkz3rauuoioo26qwmq --config REGION=us-phoenix-1 --config FINGERPRINT=41:82:5f:44:ca:a1:2e:58:d2:63:6a:af:52:d5:3d:04 --config PRIVATE_KEY_NAME=oci_private_key.pem --config PASSPHRASE=1987 --syslog-url=tcp://s3cr3t.papertrailapp.com:4242 fn-compute-app`
+`fn create app --annotation oracle.com/oci/subnetIds='["ocid1.subnet.oc1.phx.aaaaaaaaghmsma7mpqhqdhbgnby25u2zo4wqlrrcskvu7jg56dryxt3hgvka"]' --config TENANT_OCID=ocid1.tenancy.oc1..aaaaaaaaydrjm77otncda2xn7qtv7l3hqnd3zxn2u6siwdhniibwfv4wwhta --config USER_OCID=ocid1.user.oc1..aaaaaaaa4seqx6jeyma46ldy4cbuv35q4l26scz5p4rkz3rauuoioo26qwmq --config REGION=us-phoenix-1 --config FINGERPRINT=42:82:5f:44:ca:a1:2e:58:d2:63:6a:af:52:d5:3d:42 --config PRIVATE_KEY_NAME=oci_private_key.pem --config PASSPHRASE=4242 --syslog-url=tcp://s3cr3t.papertrailapp.com:4242 fn-compute-app`
 
 **Check**
 
@@ -35,9 +35,7 @@ e.g.
 
 **Deploy**
 
- `fn -v deploy --app fn-compute-app`
-
-> Go to OCIR and make sure your repo is converted to PUBLIC
+ `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=<private_key_name>` e.g. `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=oci_private_key.pem`
 
 **Run**
 
@@ -81,9 +79,7 @@ Now that you have the list of instances (along with their OCID), try updating th
 
 **Deploy**
 
- `fn -v deploy --app fn-compute-app`
-
-> Go to OCIR and make sure your repo is converted to PUBLIC
+ `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=<private_key_name>` e.g. `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=oci_private_key.pem`
 
 **Run**
 
