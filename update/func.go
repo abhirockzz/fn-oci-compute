@@ -21,15 +21,15 @@ const successMsg string = "Updated Compute Instance information successfully"
 
 func ociComputeEventHandler(ctx context.Context, in io.Reader, out io.Writer) {
 
-	fnCtx := fdk.Context(ctx)
+	fnCtx := fdk.GetContext(ctx)
 
-	tenancy := fnCtx.Config["TENANT_OCID"]
-	user := fnCtx.Config["USER_OCID"]
-	region := fnCtx.Config["REGION"]
-	fingerprint := fnCtx.Config["FINGERPRINT"]
-	privateKeyName := fnCtx.Config["PRIVATE_KEY_NAME"]
+	tenancy := fnCtx.Config()["TENANT_OCID"]
+	user := fnCtx.Config()["USER_OCID"]
+	region := fnCtx.Config()["REGION"]
+	fingerprint := fnCtx.Config()["FINGERPRINT"]
+	privateKeyName := fnCtx.Config()["PRIVATE_KEY_NAME"]
 	privateKeyLocation := privateKeyFolder + "/" + privateKeyName
-	passphrase := fnCtx.Config["PASSPHRASE"]
+	passphrase := fnCtx.Config()["PASSPHRASE"]
 
 	log.Println("TENANT_OCID ", tenancy)
 	log.Println("USER_OCID ", user)
