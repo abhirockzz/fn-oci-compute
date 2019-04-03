@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"os"
 
 	fdk "github.com/fnproject/fdk-go"
 	"github.com/oracle/oci-go-sdk/common"
@@ -21,21 +22,19 @@ const successMsg string = "Updated Compute Instance information successfully"
 
 func ociComputeEventHandler(ctx context.Context, in io.Reader, out io.Writer) {
 
-	fnCtx := fdk.GetContext(ctx)
-
-	tenancy := fnCtx.Config()["TENANT_OCID"]
-	user := fnCtx.Config()["USER_OCID"]
-	region := fnCtx.Config()["REGION"]
-	fingerprint := fnCtx.Config()["FINGERPRINT"]
-	privateKeyName := fnCtx.Config()["PRIVATE_KEY_NAME"]
+	tenancy := os.Getenv("TENANT_OCID")
+	user := os.Getenv("USER_OCID")
+	region := os.Getenv("REGION")
+	fingerprint := os.Getenv("FINGERPRINT")
+	privateKeyName := os.Getenv("OCI_PRIVATE_KEY_FILE_NAME")
 	privateKeyLocation := privateKeyFolder + "/" + privateKeyName
-	passphrase := fnCtx.Config()["PASSPHRASE"]
+	passphrase := os.Getenv("PASSPHRASE")
 
 	log.Println("TENANT_OCID ", tenancy)
 	log.Println("USER_OCID ", user)
 	log.Println("REGION ", region)
 	log.Println("FINGERPRINT ", fingerprint)
-	log.Println("PRIVATE_KEY_NAME ", privateKeyName)
+	log.Println("OCI_PRIVATE_KEY_FILE_NAME ", privateKeyName)
 	log.Println("PRIVATE_KEY_LOCATION ", privateKeyLocation)
 
 	privateKey, err := ioutil.ReadFile(privateKeyLocation)

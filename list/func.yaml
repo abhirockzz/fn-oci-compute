@@ -1,6 +1,5 @@
 schema_version: 20180708
 name: list
-version: 0.0.3
+version: 0.0.4
 runtime: go
 entrypoint: ./func
-format: http

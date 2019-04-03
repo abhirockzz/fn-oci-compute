@@ -15,29 +15,31 @@ Clone this repo
 
 ### Create app
 
-`fn create app --annotation oracle.com/oci/subnetIds=<SUBNETS> --config TENANT_OCID=<TENANT_OCID> --config USER_OCID=<USER_OCID> --config REGION=<REGION> --config FINGERPRINT=<FINGERPRINT> --config PRIVATE_KEY_NAME=<NAME_OF_YOUR_OCI_API_PRIVATE_KEY> --config PASSPHRASE=<PASSPHRASE> --syslog-url=<SYSLOG_ENDPOINT> fn-compute-app`
-
-> `--syslog-url` is optional
+`fn create app --annotation oracle.com/oci/subnetIds=<SUBNETS> --config TENANT_OCID=<TENANT_OCID> --config USER_OCID=<USER_OCID> --config REGION=<REGION> --config FINGERPRINT=<FINGERPRINT> --config PASSPHRASE=<PASSPHRASE> fn-compute-app`
 
 e.g.
 
-`fn create app --annotation oracle.com/oci/subnetIds='["ocid1.subnet.oc1.phx.aaaaaaaaghmsma7mpqhqdhbgnby25u2zo4wqlrrcskvu7jg56dryxt3hgvka"]' --config TENANT_OCID=ocid1.tenancy.oc1..aaaaaaaaydrjm77otncda2xn7qtv7l3hqnd3zxn2u6siwdhniibwfv4wwhta --config USER_OCID=ocid1.user.oc1..aaaaaaaa4seqx6jeyma46ldy4cbuv35q4l26scz5p4rkz3rauuoioo26qwmq --config REGION=us-phoenix-1 --config FINGERPRINT=42:82:5f:44:ca:a1:2e:58:d2:63:6a:af:52:d5:3d:42 --config PRIVATE_KEY_NAME=oci_private_key.pem --config PASSPHRASE=4242 --syslog-url=tcp://s3cr3t.papertrailapp.com:4242 fn-compute-app`
+`fn create app --annotation oracle.com/oci/subnetIds='["ocid1.subnet.oc1.phx.aaaaaaaaghmsma7mpqhqdhbgnby25u2zo4wqlrrcskvu7jg56dryxt3hgvka"]' --config TENANT_OCID=ocid1.tenancy.oc1..aaaaaaaaydrjm77otncda2xn7qtv7l3hqnd3zxn2u6siwdhniibwfv4wwhta --config USER_OCID=ocid1.user.oc1..aaaaaaaa4seqx6jeyma46ldy4cbuv35q4l26scz5p4rkz3rauuoioo26qwmq --config REGION=us-phoenix-1 --config FINGERPRINT=42:82:5f:44:ca:a1:2e:58:d2:63:6a:af:52:d5:3d:42 --config PASSPHRASE=4242 fn-compute-app`
 
 **Check**
 
 `fn inspect app fn-compute-app`
 
-## LIST function
+## Deploy functions
 
-**Before you proceed...**
+> Before you proceed copy your private key file to both the function folders
 
-`cd fn-oci-compute/list` and copy your private key file e.g. `cp /home/me/oci_private_key.pem .` 
+Change to correct directory `cd fn-oci-compute`
 
-**Deploy**
+`fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=<PRIVATE_KEY_NAME> --all`
 
- `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=<private_key_name>` e.g. `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=oci_private_key.pem`
+e.g.
 
-**Run**
+`fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=oci_private_key.pem --all`
+
+## Test
+
+### LIST compute instances
 
 List all instances in a specific OCI compartment. `CompartmentIDFilter` - OCID of the compartment in which your compute instance exists
 
@@ -69,19 +71,9 @@ In case you specify an incorrect compartment ID, you might see
 	    "Error": "Service error:InvalidParameter. CompartmentId must be specified as a valid OCID. http status code: 400. Opc request id: 85a816e1db955c0a4869cf7b6a4d2231/24B49E46B2350CE2B04657A1AD9791BE/F8FED5D9F3F964E10B1E9C6E65FC6EEC"
 	}
 
-## UPDATE function
+### UPDATE compute instance
 
 Now that you have the list of instances (along with their OCID), try updating the **display name** of one such instance
-
-**Before you proceed...**
-
-`cd fn-oci-compute/update` and copy your private key file e.g. `cp /home/me/oci_private_key.pem .` 
-
-**Deploy**
-
- `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=<private_key_name>` e.g. `fn -v deploy --app fn-compute-app --build-arg PRIVATE_KEY_NAME=oci_private_key.pem`
-
-**Run**
 
 > Replace value for `OCID` as per your compute instance and use an appropriate value for `NewDisplayName`
 
